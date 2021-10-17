@@ -10,16 +10,24 @@ const gulp = require("gulp");
 
 // log a message
 
-gulp.task("message", function () {
+gulp.task("message", () => {
   return console.log("Gulp is running...");
 });
 
 // copy all HTML files
-gulp.task('copyHtml', function() {
+gulp.task('copyHtml', () => {
   gulp.src('src/*.html')
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task("default", function () {
+// Optimize images
+gulp.task('imageMin', () => {
+  gulp.src('src/assets/images/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/assets/images'));
+});
+
+
+gulp.task("default", () => {
   return console.log("Gulp is running...");
 });
