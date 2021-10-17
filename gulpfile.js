@@ -13,3 +13,13 @@ const gulp = require("gulp");
 gulp.task("message", function () {
   return console.log("Gulp is running...");
 });
+
+// copy all HTML files
+gulp.task('copyHtml', function() {
+  gulp.src('src/*.html')
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task("default", function () {
+  return console.log("Gulp is running...");
+});
