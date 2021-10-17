@@ -1,4 +1,5 @@
 const gulp = require("gulp");
+const imagemin = require('gulp-Imagemin');
 
 /*
   -- TOP LEVEL FUNCTIONS --
