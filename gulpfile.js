@@ -18,7 +18,7 @@ gulp.task("message", () => {
 });
 
 // copy all HTML files
-gulp.task('copyHtml', () => {
+gulp.task('copyHtml', async () => {
   gulp.src('src/*.html')
     .pipe(gulp.dest('dist'));
 });
@@ -38,12 +38,10 @@ gulp.task('minify', () => {
 })
 
 // Compile Sass
-gulp.task('sass', () => {
+gulp.task('sass', async () => {
   gulp.src('src/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task("default", () => {
-  return console.log("Gulp is running...");
-});
+gulp.task("default", ["message", "copyHtml", "imageMin", "minify", "sass"]);
