@@ -47,12 +47,11 @@ gulp.task('scripts', async () => {
     .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task("default", gulp.series(["message", "copyHtml", "imageMin", "sass"]));
+gulp.task("default", gulp.series(["message", "copyHtml", "imageMin", "sass", 'scripts']));
 
-gulp.task("watch", async () => {
-  gulp.watch('src/*.html', gulp.series(["copyHtml"]));
-  gulp.watch('src/images/*', gulp.series(["imageMin"]));
-  gulp.watch('src/sass/*.scss', gulp.series(["sass"]));
-  gulp.watch('src/js/*.js', gulp.series(["scripts"]));
-}
-);
+gulp.task("watch", () => {
+  gulp.watch('src/js/*.js', ["scripts"]);
+  gulp.watch('src/images/*', ["imageMin"]);
+  gulp.watch('src/sass/*.scss', ["sass"]);
+  gulp.watch('src/*.html', ["copyHtml"]);
+});
