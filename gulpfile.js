@@ -2,6 +2,7 @@ const gulp = require("gulp"),
 series = require("gulp"),
 imagemin = require('gulp-imagemin'),
 uglify = require('gulp-uglify'),
+concat = require('gulp-concat'),
 sass = require('gulp-sass')(require('sass'));
 
 /*
@@ -31,13 +32,6 @@ gulp.task('imageMin', async () => {
     .pipe(gulp.dest('dist/assets/images'));
 });
 
-// Minify JS
-gulp.task('minify', async () => {
-  gulp.src('src/js/*.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/js'));
-})
-
 // Compile Sass
 gulp.task('sass', async () => {
   gulp.src('src/sass/*.scss')
@@ -45,4 +39,12 @@ gulp.task('sass', async () => {
     .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task("default", gulp.series(["message", "copyHtml", "imageMin", "minify", "sass"]));
+// concatinate all JS files
+gulp.task('scripts', async () => {
+  gulp.src('src/js/*.js')
+    .pipe(concat('main.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task("default", gulp.series(["message", "copyHtml", "imageMin", "sass"]));
