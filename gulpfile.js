@@ -29,7 +29,7 @@ gulp.task('copyHtml', async () => {
 gulp.task('imageMin', async () => {
   gulp.src('src/images/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('dist/assets/images'));
+    .pipe(gulp.dest('dist/images'));
 });
 
 // Compile Sass
@@ -48,3 +48,11 @@ gulp.task('scripts', async () => {
 });
 
 gulp.task("default", gulp.series(["message", "copyHtml", "imageMin", "sass"]));
+
+gulp.task("watch", async () => {
+  gulp.watch('src/*.html', gulp.series(["copyHtml"]));
+  gulp.watch('src/images/*', gulp.series(["imageMin"]));
+  gulp.watch('src/sass/*.scss', gulp.series(["sass"]));
+  gulp.watch('src/js/*.js', gulp.series(["scripts"]));
+}
+);
